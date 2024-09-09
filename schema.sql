@@ -1,5 +1,5 @@
 -- Next Auth standard tables, see https://authjs.dev/reference/adapter/pg#setup
-CREATE TABLE verification_token
+CREATE TABLE didit_verification_token
 (
   identifier TEXT NOT NULL,
   expires TIMESTAMPTZ NOT NULL,
@@ -8,7 +8,7 @@ CREATE TABLE verification_token
   PRIMARY KEY (identifier, token)
 );
 
-CREATE TABLE accounts
+CREATE TABLE didit_accounts
 (
   id SERIAL,
   "userId" INTEGER NOT NULL,
@@ -26,7 +26,7 @@ CREATE TABLE accounts
   PRIMARY KEY (id)
 );
 
-CREATE TABLE sessions
+CREATE TABLE didit_sessions
 (
   id SERIAL,
   "userId" INTEGER NOT NULL,
@@ -36,7 +36,7 @@ CREATE TABLE sessions
   PRIMARY KEY (id)
 );
 
-CREATE TABLE users
+CREATE TABLE didit_users
 (
   id SERIAL,
   name VARCHAR(255),
@@ -48,31 +48,31 @@ CREATE TABLE users
 );
 
 -- Posts table
-CREATE TABLE posts (
+CREATE TABLE didit_posts (
     id SERIAL PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
     body TEXT,
-    user_id INT REFERENCES users(id),
+    user_id INT REFERENCES didit_users(id),
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Comments table
-CREATE TABLE comments (
+CREATE TABLE didit_comments (
     id SERIAL PRIMARY KEY,
     body TEXT NOT NULL,
-    user_id INT REFERENCES users(id),
-    post_id INT REFERENCES posts(id),
-    parent_comment_id INT NULL REFERENCES comments(id),
+    user_id INT REFERENCES didit_users(id),
+    post_id INT REFERENCES didit_posts(id),
+    parent_comment_id INT NULL REFERENCES didit_comments(id),
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Votes table
-CREATE TABLE votes (
+CREATE TABLE didit_votes (
     id SERIAL PRIMARY KEY,
-    user_id INT REFERENCES users(id),
-    post_id INT NULL REFERENCES posts(id),
+    user_id INT REFERENCES didit_users(id),
+    post_id INT NULL REFERENCES didit_posts(id),
     vote SMALLINT CHECK (vote IN (-1, 1)),
     vote_type VARCHAR(255) CHECK (vote_type IN ('post', 'comment')),
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,

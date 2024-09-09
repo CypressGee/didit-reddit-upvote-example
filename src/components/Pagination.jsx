@@ -4,7 +4,9 @@ import clsx from "clsx";
 import { GrFormNext, GrFormPrevious } from "react-icons/gr";
 
 export async function Pagination({ currentPage = 1 }) {
-  const { rows: postCount } = await db.query(`SELECT COUNT(*) FROM posts`);
+  const { rows: postCount } = await db.query(
+    `SELECT COUNT(*) FROM didit_posts`
+  );
   const count = postCount[0].count;
   const numOfPages = Math.ceil(count / POSTS_PER_PAGE);
 

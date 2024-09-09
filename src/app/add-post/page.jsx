@@ -18,7 +18,7 @@ export default async function Home() {
     }
 
     await db.query(
-      "INSERT INTO posts (title, body, user_id) VALUES ($1, $2, $3)",
+      "INSERT INTO didit_posts (title, body, didit_user_id) VALUES ($1, $2, $3)",
       [title, content, userId]
     );
 

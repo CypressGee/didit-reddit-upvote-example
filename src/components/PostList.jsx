@@ -6,12 +6,12 @@ import { POSTS_PER_PAGE } from "@/config";
 
 export async function PostList({ currentPage = 1 }) {
   const { rows: posts } =
-    await db.query(`SELECT posts.id, posts.title, posts.body, posts.created_at, users.name, 
-    COALESCE(SUM(votes.vote), 0) AS vote_total
-     FROM posts
-     JOIN users ON posts.user_id = users.id
-     LEFT JOIN votes ON votes.post_id = posts.id
-     GROUP BY posts.id, users.name
+    await db.query(`SELECT didit_posts.id, didit_posts.title, didit_posts.body, didit_posts.created_at, didit_users.name, 
+    COALESCE(SUM(didit_votes.vote), 0) AS vote_total
+     FROM didit_posts
+     JOIN didit_users ON didit_posts.user_id = didit_users.id
+     LEFT JOIN didit_votes ON didit_votes.post_id = didit_posts.id
+     GROUP BY didit_posts.id, didit_users.name
      ORDER BY vote_total DESC
      LIMIT ${POSTS_PER_PAGE}
      OFFSET ${POSTS_PER_PAGE * (currentPage - 1)}`);

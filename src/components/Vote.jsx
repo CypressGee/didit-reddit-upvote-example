@@ -5,7 +5,7 @@ import { VoteButtons } from "./VoteButtons";
 
 async function getExistingVote(userId, postId) {
   const { rows: existingVotes } = await db.query(
-    "SELECT * FROM votes WHERE user_id = $1 AND post_id = $2 LIMIT 1",
+    "SELECT * FROM votes WHERE didit_user_id = $1 AND didit_post_id = $2 LIMIT 1",
     [userId, postId]
   );
 
