@@ -46,3 +46,11 @@ The project is a work in progress and is not yet complete.
 - [ ] User following
 - [ ] User feed (posts from users you follow)
 - [ ] User flair
+
+PROJECT ASSIGNMENT REFLECTION:=
+The requirements I met were deploying it to VERCEL.
+
+Personal reflection:
+This is was a challening and learning project for myself. I have always had troubles with Databases. following the steps was easy enough but also making sure to follow the steps clearly.
+
+What I found really challenging but also rewarding was having to change the already made database, as the "TABLE POSTS" was already a table in my previous databases. I had to go through and change all the .ids with my own. This was challening but also a hug sign of relief that it worked and deployed. I didn't expect to encounter this issue but having to look through someneone else's code was a learning curve.
